@@ -24,7 +24,7 @@ exports.register = (req, res) => {
                     }
                 });
             } else {
-                res.status(401).json({ success: false, msg: 'La dirección de correo electrónico ya está registrada. Prueba con uno nuevo.' });
+                res.status(401).json({ success: false, msg: 'La dirección de correo electrónico ya está registrada. Prueba con una nueva.' });
             }
         }
     });
@@ -71,7 +71,7 @@ exports.changepassword = (req, res) => {
                     }
                 });
             } else {
-                return res.json({ success: false, msg: 'Contraseñas incorrecta' });
+                return res.json({ success: false, msg: 'Contraseñas incorrectas' });
             }
         });
     });
@@ -85,8 +85,8 @@ exports.forgotpassword = (req, res) => {
         } else {
             const token = jwt.sign({ data: { email: email } }, jwtconfig.secret, { expiresIn: 700 });
             const msg = '<p>Has olvidado tu contraseña, dale clic en <a href="http://localhost:4200/resetpassword?index=' + token + '">reestablecer contraseña</a> para cambiarla</p>'
-            nodeMailer.nodeMailer(email, 'Haz olvidado tu contraseña', msg);
-            return res.json({ success: true, msg: 'Se ha enviado la notificacion de contraseña olvidada' });
+            nodeMailer.nodeMailer(email, 'Has olvidado tu contraseña', msg);
+            return res.json({ success: true, msg: 'Se ha enviado la notificación de contraseña olvidada' });
         }
     });
 }
@@ -100,7 +100,7 @@ exports.resetpassword = (req, res) => {
             return res.json({ success: false, msg: 'Ha ocurrido un error' });
         }
         updatePassword(email, password, (err, user) => {
-            return res.json({ success: true, msg: 'Password is Changed' });
+            return res.json({ success: true, msg: 'La contraseña ha cambiado' });
         });
     });
 }
